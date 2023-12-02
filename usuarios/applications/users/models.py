@@ -6,7 +6,7 @@ from .managers import UserManager
 
 # Create your models here.
 GENDER_CHOICES = (
-    ('M', 'Maculino'),
+    ('M', 'MASCULINO'),
     ('F', 'FEMENINO'),
     ('O', 'OTROS')
 )
@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     
     def get_short_name(self):
-        return self.usrname
+        return self.username
     
     def get_full_name(self):
         return self.nombres + '' + self.apellidos
