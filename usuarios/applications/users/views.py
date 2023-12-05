@@ -35,7 +35,7 @@ class LoginUser(FormView):
         def form_valid(self, form):
             user = authenticate(
                  username = form.cleaned_data['username'],
-                 password = form.cleaned_data['password'],
+                 password = form.cleaned_data['password']
             )
             login(self.request, user)
             return super(LoginUser, self).form_valid(form)

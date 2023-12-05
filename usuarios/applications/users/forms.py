@@ -38,8 +38,8 @@ class LoginForm(forms.Form):
         label='username',
         required=True,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Username',
-            'style': {'margin: 10px'}})
+            'placeholder': 'Username'
+           })
     )
 
     password = forms.CharField(
@@ -56,5 +56,6 @@ class LoginForm(forms.Form):
         if not authenticate(username=username, password=password):
             raise forms.ValidationError('Los datos del Usuario no son correctos')
         
-        return self.cleaned_data
+        return cleaned_data 
+    #arreglar error de validacion
         
