@@ -58,4 +58,14 @@ class LoginForm(forms.Form):
         
         return cleaned_data 
     
-        
+class UpdatePasswordForm(forms.Form):
+    password1 = forms.CharField(
+        label='Contraseña',
+        required=True,
+        widget=forms.PasswordInput(attrs={'placeholder': 'Cotraseña Actual'})
+    )
+    password2 = forms.CharField(
+        label='Contraseña',
+        required=True,
+        widget=forms.PasswordInput(attrs={'placeholder': 'Cotraseña Nueva'})
+    )
