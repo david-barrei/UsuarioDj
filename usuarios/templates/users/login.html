@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <title>Document</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="estilo.css">
+  
 </head>
 
 <body>
  <h1> Acceder al Sistema </h1>
-     <form method ="POST"> {% csrf_token%}
+     <form method ="post"> {% csrf_token%}
         {{ form.as_p}}
-        <button type='submit'> Registrar </button>
+        <button type='submit'> Login </button>
      </form>
 </body>
 </html>
