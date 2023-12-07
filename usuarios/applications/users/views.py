@@ -87,5 +87,5 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
                usuario.set_password(new_password)
                usuario.save()#Guardar contraseña nueva
 
-            logout(self.request)
+            logout(self.request)#Volver a logiarse 
             return super(UpdatePasswordView, self).form_valid(form)
