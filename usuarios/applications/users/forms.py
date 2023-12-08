@@ -69,3 +69,7 @@ class UpdatePasswordForm(forms.Form):
         required=True,
         widget=forms.PasswordInput(attrs={'placeholder': 'Cotraseña Nueva'})
     )
+
+
+class VerificationForm(forms.Form):
+    codregistro = forms.CharField(required=True)

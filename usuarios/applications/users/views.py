@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 from .models import User
 from .functions import code_generator
 
-from .forms import UserRegisterForm, LoginForm, UpdatePasswordForm
+from .forms import UserRegisterForm, LoginForm, UpdatePasswordForm, VerificationForm
 
 # Create your views here.
 
@@ -42,7 +42,7 @@ class UserRegisterView(FormView):
 
         return HttpResponseRedirect(
                reverse(
-                    'users_app:user-login'
+                    'users_app:user-verfication'
                )
           )
     
@@ -89,3 +89,13 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
 
             logout(self.request)#Volver a logiarse 
             return super(UpdatePasswordView, self).form_valid(form)
+        
+class CodeVerificationView(FormView):
+     template_name = 'users/verification.html'
+     form_class = LoginForm
+     success_url = reverse_lazy('users_app:user-login')
+
+     def form_valid(self, form):
+            
+            return super(CodeVerificationView, self).form_valid(form)
+        
