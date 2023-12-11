@@ -35,7 +35,7 @@ class UserRegisterView(FormView):
         #enviar el codigo al email del user
         asunto = 'Confirmacion de email'
         mensaje = 'Codigo de verificacion' + codigo
-        email_remitente = 'davbarreiro4@gmail.com'
+        email_remitente = 'kevtamay@gmail.com'
         #
         send_mail(asunto, mensaje, email_remitente, [form.cleaned_data['email']])
         #redigir a la pantalla de validacion
@@ -97,5 +97,5 @@ class CodeVerificationView(FormView):
 
      def form_valid(self, form):
             
-            return super(CodeVerificationView, self).form_valid(form)
+          return super(CodeVerificationView, self).form_valid(form)
         
