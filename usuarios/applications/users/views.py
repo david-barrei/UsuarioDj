@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
@@ -22,8 +23,7 @@ class UserRegisterView(FormView):
         #Genereamos el codigo
         codigo = code_generator()
 
-
-        User.objects.create_user(
+        usuario = User.objects.create_user(
             form.cleaned_data['username'], #recuperar el dato desde el formulario
             form.cleaned_data['email'],
             form.cleaned_data['password1'],
@@ -31,7 +31,7 @@ class UserRegisterView(FormView):
             apellidos = form.cleaned_data['apellidos'],
             genero = form.cleaned_data['genero'],
             codregistro = codigo
-        )
+          )
         #enviar el codigo al email del user
         asunto = 'Confirmacion de email'
         mensaje = 'Codigo de verificacion' + codigo
@@ -42,7 +42,9 @@ class UserRegisterView(FormView):
 
         return HttpResponseRedirect(
                reverse(
-                    'users_app:user-verification'
+                    'users_app:user-verification',
+                    kwargs= {'pk': usuario.id} #para recuperar el usuario
+
                )
           )
     
@@ -89,13 +91,25 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
 
             logout(self.request)#Volver a logiarse 
             return super(UpdatePasswordView, self).form_valid(form)
-        
+
+#Verifiacion de codigo        
 class CodeVerificationView(FormView):
      template_name = 'users/verification.html'
-     form_class = LoginForm
+     form_class = VerificationForm
      success_url = reverse_lazy('users_app:user-login')
 
+     def get_form_kwargs(self):
+          kwargs = super(CodeVerificationView, self).get_form_kwargs()
+          kwargs.update({
+               'pk': self.kwargs['pk']#Que envie nuevos kwargs a nuestro formulario
+          })
+          return kwargs
+
      def form_valid(self, form):
-            
+          User.objects.filter(
+               id=self.kwargs['pk']
+          ).update(
+               is_active=True
+          )
           return super(CodeVerificationView, self).form_valid(form)
         
