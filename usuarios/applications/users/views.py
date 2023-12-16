@@ -42,7 +42,7 @@ class UserRegisterView(FormView):
 
         return HttpResponseRedirect(
                reverse(
-                    'users_app:user-verfication'
+                    'users_app:user-verification'
                )
           )
     
