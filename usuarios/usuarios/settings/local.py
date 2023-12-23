@@ -22,7 +22,6 @@ DATABASES = {
 
 
 
-STATIC_URL = 'static/'
 
 #Email settings 
 
